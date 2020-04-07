@@ -14,11 +14,13 @@ const keyboardArea = document.createElement("div");
 keyboardArea.className = 'keyboard';
 
 const alphabet = {
+
   rus: [['ё', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'],
         ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '/', 'Del'],
         ['Capslock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
         ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '&#9650;', 'Shift'],
         ['Ctrl', 'Win', 'Atl', '', 'Atl', '&#9668', '&#9660;', '&#9658;', 'Ctrl']],
+
   eng: [['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'],
         ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del'],
         ['Capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'],
@@ -27,6 +29,7 @@ const alphabet = {
 }
 
 const keyCode = {
+  
   id: [['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace'],
     ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Del'],
     ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
@@ -74,10 +77,10 @@ function getKeyboardLine() {
       if (i == 4 && j == 3) {
         divBtn.className = 'space ' + 'line-elem';
       }
-      // divBtn.append(alphabet.rus[i][j]);
-      divBtn.innerHTML = (alphabet.rus[i][j]); // Добавил символы клавиатуры
-      divBtn.id = (keyCode.id[i][j]);  // Добавил id.keycode символам
+      divBtn.innerHTML = (alphabet.rus[i][j]);
+      divBtn.id = (keyCode.id[i][j]);
       btn.push(divBtn)
+
     }
     return btn
   }
@@ -92,7 +95,7 @@ function getKeyboardLine() {
   return btnLine
 }
 
-keyboardArea.append(...getKeyboardLine());
+keyboardArea.append(...getKeyboardLine(alphabet.eng));
 
 keyContainer.appendChild(taskTitle);
 keyContainer.appendChild(formArea);
@@ -100,18 +103,6 @@ keyContainer.appendChild(keyboardArea);
 
 document.body.append(keyContainer);
 
-const btnDiv = document.querySelector('.keyboard');
-console.log(btnDiv)
-
-btnDiv.addEventListener('keydown', (event) => {
-  btnDiv.querySelectorAll('div.line-elem')
-  .forEach(el => {
-    if (event.code == 'Digit1') {
-      el.classList.add('active')
-    }
-
-  })
-})
 
 window.addEventListener('keydown', (event) => {
   const btnCode = document.getElementById(event.code);
@@ -120,13 +111,4 @@ window.addEventListener('keydown', (event) => {
     const btnCode = document.getElementById(event.code);
     btnCode.classList.remove('active');
   });
-  
 });
-
-
-
-
-
-// window.addEventListener('beforeunload', () => {
-//   // code 
-// })
